@@ -86,11 +86,11 @@
     outline: none;
     padding-bottom: 15px;
     text-align: center;
-    width: 400px;
+    width: 250px;
   }
   
   .login.page .title {
-    font-size: 200%;
+    font-size: 150%;
   }
   
   .login.page .usernameInput {

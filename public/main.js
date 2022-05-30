@@ -18,6 +18,7 @@ $(function() {
   
     const socket = io();
     const pushable = $('.pushable');
+    const namebtn = $('.namebtn');
   
     // Prompt for setting a username
     let username;
@@ -229,7 +230,9 @@ $(function() {
         setUsername();
       }
     });
-    
+    namebtn.click(() => {
+      setUsername();
+    });
   
     // Socket events
   
