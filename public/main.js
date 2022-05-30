@@ -2,9 +2,9 @@ $(function() {
     const FADE_TIME = 150; // ms
     const TYPING_TIMER_LENGTH = 400; // ms
     const COLORS = [
-      '#e21400', '#91580f', '#f8a700', '#f78b00',
-      '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
-      '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
+      '#FADCDA', '#EEB8B8', '#C5DADE', '#D5E1DF',
+      '#F6B99D', '#E6CEAC', '#F4606C', '#A3B6C5',
+      '#FFEF9F', '#E1F1E1' , '#CB8A90', '#BCC7B5'
     ];
   
     // Initialize variables
@@ -17,6 +17,7 @@ $(function() {
     const $chatPage = $('.chat.page');          // The chatroom page
   
     const socket = io();
+    const pushable = $('.pushable');
   
     // Prompt for setting a username
     let username;
@@ -52,7 +53,7 @@ $(function() {
     }
   
     // Sends a chat message
-    const sendMessage = () => {
+    function sendMessage () {
       let message = $inputMessage.val();
       // Prevent markup from being injected into the message
       message = cleanInput(message);
@@ -218,6 +219,17 @@ $(function() {
     $inputMessage.click(() => {
       $inputMessage.focus();
     });
+
+    pushable.click(() => {
+      if (username) {
+        sendMessage();
+        socket.emit('stop typing');
+        typing = false;
+      } else {
+        setUsername();
+      }
+    });
+    
   
     // Socket events
   
@@ -225,7 +237,7 @@ $(function() {
     socket.on('login', (data) => {
       connected = true;
       // Display the welcome message
-      const message = 'Welcome to Socket.IO Chat – ';
+      const message = 'Welcome to Space Room Chat – ';
       log(message, {
         prepend: true
       });
